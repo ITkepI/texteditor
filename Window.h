@@ -17,18 +17,22 @@ public:
 
     void Print(FileMutator const &);
 
-    size_t start();
+    void Print(FileMutator const &, Cursor const &);
 
     void MoveStartDown(size_t a);
 
-    WINDOW *window();
+    void MoveStartUp(size_t a);
 
-    int MaxX();
+    [[nodiscard]] size_t start();
 
-    int MaxY();
+    [[nodiscard]] WINDOW *window();
+
+    [[nodiscard]] int MaxX();
+
+    [[nodiscard]] int MaxY();
 
 private:
-    size_t window_start_{};
+    size_t window_start_ = 0;
     Printer printer_;
     WINDOW *window_;
 };

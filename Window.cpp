@@ -10,7 +10,12 @@ Window::Window() : Window(initscr()) {}
 
 void Window::Print(FileMutator const &file_mutator) {
     wmove(window_, 0, 0);
-    printer_.Print(file_mutator, window_start_, MaxY());
+    printer_.Print(file_mutator, window_start_, MaxY() - 1);
+}
+
+void Window::Print(FileMutator const &file_mutator, Cursor const &cursor) {
+    wmove(window_, 0, 0);
+    printer_.Print(file_mutator, window_start_, MaxY(), cursor);
 }
 
 WINDOW *Window::window() {
@@ -32,3 +37,8 @@ int Window::MaxY() {
 void Window::MoveStartDown(size_t a) {
     window_start_ += a;
 }
+
+void Window::MoveStartUp(size_t a) {
+    window_start_ -= a;
+}
+

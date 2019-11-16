@@ -14,7 +14,7 @@ using Line = std::string;
 
 struct FileBuffer final {
     explicit FileBuffer(std::istream &istream) {
-        Line s;
+        Line s{};
         while (std::getline(istream, s)) {
             buffer.push_back(s);
         }

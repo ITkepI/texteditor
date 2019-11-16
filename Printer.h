@@ -6,11 +6,16 @@
 #define TEXTEDITOR_PRINTER_H
 
 #include "FileMutator.h"
+#include "Cursor.h"
+#include "Colors.h"
 #include <ncurses.h>
+
 
 class Printer {
 public:
     explicit Printer(WINDOW *window);
+
+    void Print(FileMutator const &, size_t, size_t, Cursor const &);
 
     void Print(FileMutator const &, size_t, size_t);
 
