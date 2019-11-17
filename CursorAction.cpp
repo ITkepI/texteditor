@@ -20,6 +20,6 @@ void GoLeft::handle(Cursor &c) {
 }
 
 void GoRight::handle(Cursor &c) {
-    if (c.char_number_in_line < c.file_mutator.line_size(c.line_number) - 1)
+    if (c.char_number_in_line + 1 < c.file_mutator.line_size(c.line_number))
         ++c.char_number_in_line;
 }
