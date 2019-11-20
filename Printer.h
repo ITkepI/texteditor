@@ -10,7 +10,10 @@
 #include "Colors.h"
 #include <ncurses.h>
 
-
+/*
+ * Класс для отрисовки состояний файла.
+ * Предполагаются изменения.
+ */
 class Printer {
 public:
     explicit Printer(WINDOW *window);

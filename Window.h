@@ -9,6 +9,10 @@
 #include "Cursor.h"
 #include <ncurses.h>
 
+/*
+ * Класс для работы с выводом на окно.
+ * Если кто-нибудь другой займется выводом можно спокойно менять эту хуйню.
+ */
 class Window {
 public:
     explicit Window(WINDOW *);

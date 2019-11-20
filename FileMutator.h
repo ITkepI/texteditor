@@ -12,6 +12,9 @@
 
 using Line = std::string;
 
+/*
+ * Просто файлобуффер(можно было бы наверное не выносить в отдельный файл
+ */
 struct FileBuffer final {
     explicit FileBuffer(std::istream &istream) {
         Line s{};
@@ -23,6 +26,9 @@ struct FileBuffer final {
     std::vector<Line> buffer;
 };
 
+/*
+ * Класс - интерфейс для работы с файлом
+ */
 class FileMutator final {
 public:
     explicit FileMutator(std::istream &istream) : file_buffer_(istream) {}

@@ -11,6 +11,13 @@
 
 #include <utility>
 
+/*
+ * Просто ActionWrapper для курсорных действий.
+ * Пример:
+ *  Cursor cur;
+ *  std::shared_ptr<ActionWrapper> aw = std::make_shared<CursorActionWrapper>(cur, std::make_shared<CursorActionWrapper>(cur, std::make_shared<GoUp>());
+ *  aw->run();
+ */
 class CursorActionWrapper final : ActionWrapper {
 public:
     CursorActionWrapper(Cursor &c, std::shared_ptr<CursorAction> const &ca) : cursor_(c), cursor_action_(ca) {}

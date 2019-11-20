@@ -8,19 +8,19 @@ void Controller::HandleInput(int c) {
     handler_.Handle(c, cursor_);
 }
 
-Controller::Controller(const FileMutator &file_mutator) : file_mutator_(file_mutator), cursor_(file_mutator) {}
+Controller::Controller(const FileMutator &file_mutator) : file_mutator_(file_mutator), cursor_(file_mutator_) {}
 
-Cursor Controller::cursor() {
+const Cursor &Controller::cursor() const {
     return cursor_;
 }
 
-FileMutator Controller::file_mutator() {
+const FileMutator &Controller::file_mutator() const {
     return file_mutator_;
 }
 
 void Handler::Handle(int c, Cursor &cursor) {
-    auto it = mapper_.find(c);
-    if (it == mapper_.end())
+    auto it = cursor_action_mapper_.find(c);
+    if (it == cursor_action_mapper_.end())
         return;
     it->second->handle(cursor);
 }

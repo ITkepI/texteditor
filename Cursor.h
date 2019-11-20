@@ -7,6 +7,8 @@
 
 #include "FileMutator.h"
 
+// Структура, которая описывает курсор.
+// Просто хранит номер строки в файле, номер символа в строке и ссылку на файл
 struct Cursor {
     explicit Cursor(const FileMutator &fileMutator);
 
@@ -17,7 +19,7 @@ struct Cursor {
      */
     size_t char_number_in_line{};
     size_t line_number{};
-    FileMutator file_mutator;
+    const FileMutator &file_mutator;
 };
 
 using CursorRange = std::pair<Cursor, Cursor>;
