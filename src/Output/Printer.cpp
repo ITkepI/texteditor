@@ -27,6 +27,7 @@ void Printer::Print(FileViewer const &file_mutator, size_t begin, size_t size) {
 int Printer::Print(WINDOW *win, FileViewer::const_iterator beg, FileViewer::const_iterator end, Cursor const &cursor,
                    size_t windows_size) {
     int count_line = 0;
+    auto temp_iterator = beg;
     while (getcury(win) + 1 < windows_size && beg != end) {
         if (count_line == cursor.line_number) {
             wprintw(win, "%d\t", getcury(win) + 1);
@@ -43,5 +44,6 @@ int Printer::Print(WINDOW *win, FileViewer::const_iterator beg, FileViewer::cons
         ++count_line;
     }
 
-    return getcury(win);
+    // количество напечатанных строк
+    return beg - temp_iterator;
 }

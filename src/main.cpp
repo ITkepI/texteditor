@@ -34,12 +34,6 @@ int main(int argc, char *args[]) {
     while ((c = wgetch(window.window())) != 'q') {
         Cursor cursor = GetTrueCursor(controller.cursor(), controller.file_viewer());
         window.Print(controller.file_viewer(), cursor);
-        if (cursor.line_number + 1 - window.start() >= window.MaxY()) {
-            window.MoveStartDown(1);
-//            cursor.line_number = window.MaxY() - 1;
-        } else if (cursor.line_number < window.start()) {
-            window.MoveStartUp(window.start() - cursor.line_number);
-        }
         controller.HandleInput(c);
     }
     endwin();

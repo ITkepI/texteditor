@@ -8,7 +8,7 @@
 #include "../Logic/FileViewer.h"
 
 class Window {
-    virtual void Print(FileViewer const &) = 0;
+    virtual void Print(FileViewer const &, Cursor) = 0;
 };
 
 

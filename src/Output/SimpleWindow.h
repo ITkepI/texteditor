@@ -20,15 +20,7 @@ public:
 
     SimpleWindow();
 
-    void Print(FileViewer const &) override;
-
-    void Print(FileViewer const &, Cursor);
-
-    void MoveStartDown(size_t a);
-
-    void MoveStartUp(size_t a);
-
-    [[nodiscard]] size_t start();
+    void Print(FileViewer const &, Cursor) override;
 
     [[nodiscard]] WINDOW *window();
 

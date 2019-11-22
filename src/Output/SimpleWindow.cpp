@@ -8,11 +8,6 @@ SimpleWindow::SimpleWindow(WINDOW *w) : printer_(w), window_(w) {}
 
 SimpleWindow::SimpleWindow() : SimpleWindow(initscr()) {}
 
-void SimpleWindow::Print(FileViewer const &file_mutator) {
-    wmove(window_, 0, 0);
-    printer_.Print(file_mutator, window_start_, MaxY() - 1);
-}
-
 void SimpleWindow::Print(FileViewer const &file_viewer, Cursor cursor) {
     wmove(window_, 0, 0);
     werase(window_);
@@ -33,23 +28,11 @@ WINDOW *SimpleWindow::window() {
     return window_;
 }
 
-size_t SimpleWindow::start() {
-    return window_start_;
-}
-
 int SimpleWindow::MaxX() {
     return getmaxx(window_);
 }
 
 int SimpleWindow::MaxY() {
     return getmaxy(window_);
-}
-
-void SimpleWindow::MoveStartDown(size_t a) {
-    window_start_ += a;
-}
-
-void SimpleWindow::MoveStartUp(size_t a) {
-    window_start_ -= a;
 }
 
