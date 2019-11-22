@@ -5,7 +5,7 @@
 #ifndef TEXTEDITOR_CURSORACTIONWRAPPER_H
 #define TEXTEDITOR_CURSORACTIONWRAPPER_H
 
-#include "../../ActionWrapper.h"
+#include "ActionWrapper.h"
 #include "Cursor.h"
 #include "CursorAction.h"
 
