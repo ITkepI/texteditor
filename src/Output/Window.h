@@ -5,9 +5,10 @@
 #ifndef TEXTEDITOR_WINDOW_H
 #define TEXTEDITOR_WINDOW_H
 
+#include "../Logic/FileViewer.h"
 
 class Window {
-
+    virtual void Print(FileViewer const &) = 0;
 };
 
 

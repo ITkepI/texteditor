@@ -8,15 +8,15 @@ Printer::Printer(WINDOW *window) : window_(window) {
     init();
 }
 
-void Printer::Print(const FileMutator &file_mutator) {
+void Printer::Print(const FileViewer &file_mutator) {
     Print(file_mutator, 0);
 }
 
-void Printer::Print(FileMutator const &file_mutator, size_t begin) {
+void Printer::Print(FileViewer const &file_mutator, size_t begin) {
     Print(file_mutator, begin, file_mutator.lines_quantity() - begin);
 }
 
-void Printer::Print(FileMutator const &file_mutator, size_t begin, size_t size) {
+void Printer::Print(FileViewer const &file_mutator, size_t begin, size_t size) {
     wclear(window_);
     size_t count = 0;
     for (size_t i = begin; count < size && i < file_mutator.lines_quantity(); ++i, ++count) {
@@ -24,26 +24,24 @@ void Printer::Print(FileMutator const &file_mutator, size_t begin, size_t size) 
     }
 }
 
-void Printer::Print(FileMutator const &file_mutator, size_t begin, size_t size, Cursor const &cursor) {
-    werase(window_);
-    size_t count = 0;
-    for (size_t i = begin;
-         i < cursor.line_number && count < size && i < file_mutator.lines_quantity(); ++i, ++count) {
-        wprintw(window_, "%s\n", file_mutator.line(i).c_str());
+int Printer::Print(WINDOW *win, FileViewer::const_iterator beg, FileViewer::const_iterator end, Cursor const &cursor,
+                   size_t windows_size) {
+    int count_line = 0;
+    while (getcury(win) + 1 < windows_size && beg != end) {
+        if (count_line == cursor.line_number) {
+            wprintw(win, "%d\t", getcury(win) + 1);
+            for (FileViewer::const_iterator::value_type::size_type i = 0; i < beg->size(); ++i)
+                waddch(win, (*beg)[i] | (i == cursor.char_number_in_line ||
+                                         (cursor.char_number_in_line == -1 && i + 1 == beg->size()) ? COLOR_PAIR(1)
+                                                                                                    : 0));
+            if (beg->empty())
+                waddch(win, ' ' | COLOR_PAIR(1));
+            waddch(win, '\n');
+        } else
+            wprintw(win, "%d\t%s\n", getcury(win) + 1, beg->c_str());
+        ++beg;
+        ++count_line;
     }
 
-    Line line_under_cursor = cursor.file_mutator.line(cursor.line_number);
-    for (int j = 0; count < size && j < line_under_cursor.size(); ++j) {
-        waddch(window_, static_cast<chtype>(line_under_cursor.at(j)) |
-                        (j == cursor.char_number_in_line ? COLOR_PAIR(1) : 0));
-    }
-    ++count;
-    if (line_under_cursor.empty())
-        waddch(window_, ' ' | COLOR_PAIR(1));
-    waddch(window_, '\n');
-
-    for (size_t k = cursor.line_number + 1; count < size && k < file_mutator.lines_quantity(); ++k, ++count) {
-        wprintw(window_, "%s\n", file_mutator.line(k).c_str());
-    }
-    wrefresh(window_);
+    return getcury(win);
 }

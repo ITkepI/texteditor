@@ -5,7 +5,7 @@
 #ifndef TEXTEDITOR_PRINTER_H
 #define TEXTEDITOR_PRINTER_H
 
-#include "../Logic/FileMutator.h"
+#include "../Logic/FileViewer.h"
 #include "../Logic/Cursor.h"
 #include "Colors.h"
 #include <ncurses.h>
@@ -18,13 +18,14 @@ class Printer {
 public:
     explicit Printer(WINDOW *window);
 
-    void Print(FileMutator const &, size_t, size_t, Cursor const &);
+    void Print(FileViewer const &, size_t, size_t);
 
-    void Print(FileMutator const &, size_t, size_t);
+    void Print(FileViewer const &, size_t);
 
-    void Print(FileMutator const &, size_t);
+    void Print(FileViewer const &);
 
-    void Print(FileMutator const &);
+    int Print(WINDOW *win, FileViewer::const_iterator beg, FileViewer::const_iterator end, Cursor const &cursor,
+              size_t windows_size);
 
 private:
     WINDOW *window_;

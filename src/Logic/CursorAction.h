@@ -12,7 +12,7 @@
 // Базовый класс для всех действий над курсором с заданным интерфейсом.
 class CursorAction {
 public:
-    virtual void handle(Cursor &) = 0;
+    virtual void handle(Cursor &, FileBuffer const &) = 0;
 
     virtual ~CursorAction() = default;
 };
@@ -26,22 +26,22 @@ public:
 // Остальные классы аналогично.
 class GoUp final : public CursorAction {
 public:
-    void handle(Cursor &c) override;
+    void handle(Cursor &c, FileBuffer const &) override;
 };
 
 class GoDown final : public CursorAction {
 public:
-    void handle(Cursor &c) override;
+    void handle(Cursor &c, FileBuffer const &) override;
 };
 
 class GoLeft final : public CursorAction {
 public:
-    void handle(Cursor &c) override;
+    void handle(Cursor &c, FileBuffer const &) override;
 };
 
 class GoRight final : public CursorAction {
 public:
-    void handle(Cursor &c) override;
+    void handle(Cursor &c, FileBuffer const &) override;
 };
 
 #endif //TEXTEDITOR_CURSORACTION_H

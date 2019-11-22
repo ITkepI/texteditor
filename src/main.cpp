@@ -3,8 +3,8 @@
 #include <fstream>
 #include "Output/Printer.h"
 #include "Logic/Controller.h"
-#include "Logic/FileMutator.h"
-#include "Output/Window.h"
+#include "Logic/FileViewer.h"
+#include "Output/SimpleWindow.h"
 
 std::ostream &operator<<(std::ostream &os, Cursor const &c) {
     os << "X: " << c.char_number_in_line << " Y: " << c.line_number << std::endl;
@@ -12,7 +12,7 @@ std::ostream &operator<<(std::ostream &os, Cursor const &c) {
 }
 
 int main(int argc, char *args[]) {
-    Window window(initscr());
+    SimpleWindow window(initscr());
 
     if (!has_colors()) {
         endwin();
@@ -28,12 +28,12 @@ int main(int argc, char *args[]) {
     init_pair(1, COLOR_WHITE, COLOR_GREY);
 
     std::ifstream ifstream(args[1]);
-    Controller controller((FileMutator(ifstream)));
+    Controller controller((FileBuffer(ifstream)));
 
     int c;
     while ((c = wgetch(window.window())) != 'q') {
-        Cursor cursor = GetTrueCursor(controller.cursor());
-        window.Print(controller.file_mutator(), cursor);
+        Cursor cursor = GetTrueCursor(controller.cursor(), controller.file_viewer());
+        window.Print(controller.file_viewer(), cursor);
         if (cursor.line_number + 1 - window.start() >= window.MaxY()) {
             window.MoveStartDown(1);
 //            cursor.line_number = window.MaxY() - 1;

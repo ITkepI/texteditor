@@ -2,26 +2,27 @@
 // Created by Linux Oid on 16/11/2019.
 //
 
-#ifndef TEXTEDITOR_WINDOW_H
-#define TEXTEDITOR_WINDOW_H
+#ifndef TEXTEDITOR_SIMPLEWINDOW_H
+#define TEXTEDITOR_SIMPLEWINDOW_H
 
 #include "Printer.h"
 #include "../Logic/Cursor.h"
+#include "Window.h"
 #include <ncurses.h>
 
 /*
  * Класс для работы с выводом на окно.
  * Если кто-нибудь другой займется выводом можно спокойно менять эту хуйню.
  */
-class Window {
+class SimpleWindow final : Window {
 public:
-    explicit Window(WINDOW *);
+    explicit SimpleWindow(WINDOW *);
 
-    Window();
+    SimpleWindow();
 
-    void Print(FileMutator const &);
+    void Print(FileViewer const &) override;
 
-    void Print(FileMutator const &, Cursor const &);
+    void Print(FileViewer const &, Cursor);
 
     void MoveStartDown(size_t a);
 
@@ -42,4 +43,4 @@ private:
 };
 
 
-#endif //TEXTEDITOR_WINDOW_H
+#endif //TEXTEDITOR_SIMPLEWINDOW_H
