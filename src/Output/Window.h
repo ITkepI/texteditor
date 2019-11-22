@@ -6,7 +6,7 @@
 #define TEXTEDITOR_WINDOW_H
 
 #include "Printer.h"
-#include "Cursor.h"
+#include "../Logic/Cursor.h"
 #include <ncurses.h>
 
 /*

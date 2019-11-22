@@ -1,10 +1,10 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
-#include "Printer.h"
-#include "Controller.h"
-#include "FileMutator.h"
-#include "Window.h"
+#include "Output/Printer.h"
+#include "Logic/Controller.h"
+#include "Logic/FileMutator.h"
+#include "Output/Window.h"
 
 std::ostream &operator<<(std::ostream &os, Cursor const &c) {
     os << "X: " << c.char_number_in_line << " Y: " << c.line_number << std::endl;

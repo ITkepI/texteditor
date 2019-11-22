@@ -8,7 +8,7 @@
 #include <map>
 #include "FileMutator.h"
 #include "Cursor.h"
-#include "ActionWrapper.h"
+#include "../../ActionWrapper.h"
 #include "CursorActionWrapper.h"
 
 // Класс для обработки символов.

@@ -5,8 +5,8 @@
 #ifndef TEXTEDITOR_PRINTER_H
 #define TEXTEDITOR_PRINTER_H
 
-#include "FileMutator.h"
-#include "Cursor.h"
+#include "../Logic/FileMutator.h"
+#include "../Logic/Cursor.h"
 #include "Colors.h"
 #include <ncurses.h>
 
