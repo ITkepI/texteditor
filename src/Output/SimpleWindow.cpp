@@ -15,7 +15,9 @@ void Window::Print(FileMutator const &file_mutator) {
 
 void Window::Print(FileMutator const &file_mutator, Cursor const &cursor) {
     wmove(window_, 0, 0);
-    printer_.Print(file_mutator, window_start_, MaxY() - 1, cursor);
+    printer_.Print(window_, file_mutator.begin() + window_start_, file_mutator.end(), MaxY() - 1);
+    wrefresh(window_);
+//    printer_.Print(file_mutator, window_start_, MaxY() - 1, cursor);
 }
 
 WINDOW *Window::window() {

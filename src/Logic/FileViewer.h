@@ -39,6 +39,8 @@ public:
 
         reference operator*() const;
 
+        pointer operator->() const;
+
     private:
         int line_number_;
         FileBuffer const &buffer_;

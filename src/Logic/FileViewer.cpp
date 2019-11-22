@@ -64,6 +64,10 @@ operator-(const FileBuffer::const_iterator &it1, const FileBuffer::const_iterato
     return size1 - size2;
 }
 
+FileBuffer::const_iterator::value_type *FileBuffer::const_iterator::operator->() const {
+    return &(this->operator*());
+}
+
 FileMutator::const_iterator FileMutator::end() const {
     return FileMutator::const_iterator(file_buffer_, -1);
 };
